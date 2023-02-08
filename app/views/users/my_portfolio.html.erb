@@ -1,2 +1,22 @@
-<h1>Users#my_portfolio</h1>
-<p>Find me in app/views/users/my_portfolio.html.erb</p>
+<h1>My Portfolio</h1>
+
+<div class="search-area mb-3">
+  <h3>Search Stocks</h3>
+  <%= form_with url: search_stock_path, method: :get, local: true do |f| %>
+    <div class="form-group row">
+      <div class="col-sm-9">
+        <%= f.text_field :stock, placeholder: "Stock ticker symbol", autofocus: true, class: "form-control form-control-lg"%>
+      </div>
+      <div class="col-sm-3">
+        <%= f.submit "Search", class: "btn btn-success btn-lg" %>
+      </div>
+    </div>
+  <% end %>
+</div>
+<% if @stock %>
+  <div class="card card-header d-inline-block">
+    <strong>Symbol: </strong> <%= @stock.ticker %>
+    <strong>Name: </strong> <%= @stock.name %>
+    <strong>Price: </strong> <%= @stock.last_price %> 
+  </div>
+<% end %>

@@ -8,6 +8,7 @@ class Stock < ApplicationRecord
     )
 
     quote = client.quote(ticker_symbol)
-    quote.latest_price 
+    company = client.company(ticker_symbol)
+    new(name: company.company_name, ticker: ticker_symbol, last_price: quote.latest_price)
   end
 end
