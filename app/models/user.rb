@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   has_many :user_stocks
   has_many :stocks, through: :user_stocks
+  has_many :friendships
+  has_many :friends, through: :friendships
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -23,5 +25,12 @@ class User < ApplicationRecord
   def full_name 
     return "#{first_name} #{last_name}" if first_name || last_name
     "Anonymus"
+  end
+
+  def self.search(param)
+    param.strip!
+    result = where("email like ?", "%#{param}%").or(where("first_name like ?", "%#{param}%").or(where("last_name like ?", "%#{param}%")))
+    return nil if result.empty?
+    result
   end
 end
