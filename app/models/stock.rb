@@ -6,9 +6,10 @@ class Stock < ApplicationRecord
       secret_token: Rails.application.credentials.iex_client[:secret_token],
       endpoint: 'https://cloud.iexapis.com/v1'
     )
-
-    quote = client.quote(ticker_symbol)
-    company = client.company(ticker_symbol)
-    new(name: company.company_name, ticker: ticker_symbol, last_price: quote.latest_price)
+    begin
+      new(name: client.company(ticker_symbol).company_name, ticker: ticker_symbol, last_price: client.quote(ticker_symbol).latest_price)
+    rescue => exception
+      nil
+    end
   end
 end
