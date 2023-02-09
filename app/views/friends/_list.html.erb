@@ -10,12 +10,12 @@
         </tr>
       </thead>
       <tbody>
-        <% @friends.each do |friend| %>
+        <% @my_friends.each do |friend| %>
           <tr>
             <td><%= friend.email %></td>
             <td><%= friend.first_name %></td>
             <td><%= friend.last_name %></td>
-            <td><%= link_to "Stop Following", "#", class: "btn btn-danger btn-sm", data: {turbo_method: "delete", turbo_confirm: "Are you sure?"} %></td>
+            <td><%= link_to "Stop Following", friendship_path(friend), class: "btn btn-danger btn-sm", data: {turbo_method: "delete", turbo_confirm: "Are you sure?"} %></td>
           </tr>
         <% end %>
       </tbody>

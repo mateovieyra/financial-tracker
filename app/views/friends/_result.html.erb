@@ -1,0 +1,27 @@
+<% if @friends %>
+  <div class="card card-header d-inline-block">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @friends.each do |friend| %>
+          <tr>
+            <td><%= friend.first_name ? friend.first_name : "Anonymus" %></td>
+            <td><%= friend.email %></td>
+            <td>
+              <%= link_to "View Profile", "#", class: "btn btn-info"%>
+              <% if !current_user.friend?(friend) %>
+                <%= link_to "Follow", friendships_path(friend: friend.id), class: "btn btn-info", data: {turbo_method: "post"}%>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% end %>

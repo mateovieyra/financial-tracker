@@ -33,4 +33,8 @@ class User < ApplicationRecord
     return nil if result.empty?
     result
   end
+
+  def friend?(user)
+    self.friends.where(id: user.id).exists?
+  end
 end
