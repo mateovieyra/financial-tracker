@@ -15,7 +15,10 @@
             <td><%= friend.email %></td>
             <td><%= friend.first_name %></td>
             <td><%= friend.last_name %></td>
-            <td><%= link_to "Stop Following", friendship_path(friend), class: "btn btn-danger btn-sm", data: {turbo_method: "delete", turbo_confirm: "Are you sure?"} %></td>
+            <td>
+              <%= link_to "View Profile", user_path(friend), class: "btn btn-info btn-sm me-2"%>
+              <%= link_to "Stop Following", friendship_path(friend), class: "btn btn-danger btn-sm", data: {turbo_method: "delete", turbo_confirm: "Are you sure?"} %>
+            </td>
           </tr>
         <% end %>
       </tbody>

@@ -1,0 +1,32 @@
+<h2>User Details</h2>
+
+<div class="card card-header d-inline-block">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><%= @user.first_name ? @user.first_name : "Anonymus" %></td>
+        <td><%= @user.email %></td>
+        <td>
+          <% if !current_user.friend?(@user) %>
+            <%= link_to "Follow", friendships_path(friend: @user.id), class: "btn btn-info", data: {turbo_method: "post"}%>
+          <% else %>
+            <%= link_to "Stop Following", friendship_path(@user), class: "btn btn-danger btn-sm", data: {turbo_method: "delete", turbo_confirm: "Are you sure?"} %>
+          <% end %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<% if !@tracked_stocks.empty? %>
+  <%= render 'stocks/list' %>
+<% else %>
+  <p>This user is not tracking any stock</p>
+<% end %>
