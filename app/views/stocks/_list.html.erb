@@ -15,7 +15,7 @@
             <td><strong><%= stock.ticker %></strong></td>
             <td><%= stock.name %></td>
             <td><%= stock.last_price %></td>
-            <td><%= "Actions" %></td>
+            <td><%= link_to "Remove", user_stock_path(stock), class: "btn btn-danger btn-sm", data: {turbo_method: "delete", turbo_confirm: "Are you sure?"} %></td>
           </tr>
         <% end %>
       </tbody>
